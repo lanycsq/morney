@@ -1,13 +1,15 @@
 <template>
   <div class="container">
-    Labels
-    <hr />
-    <Nav />
+    <div>当前页面不存在</div>
+    <div>
+      <router-link to="/">返回首页</router-link>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  components: {},
   data() {
     return {};
   },
@@ -16,4 +18,3 @@ export default {
 
 <style scoped lang="scss">
 </style>
-
