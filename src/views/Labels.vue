@@ -1,10 +1,17 @@
 <template>
-  <div class="container">Labels</div>
+  <div class="container">
+    Labels
+    <hr />
+    <Nav />
+  </div>
 </template>
 
 <script>
+import Nav from "@/components/Nav.vue";
 export default {
-  components: {},
+  components: {
+    Nav,
+  },
   data() {
     return {};
   },

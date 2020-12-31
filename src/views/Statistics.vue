@@ -1,10 +1,13 @@
 <template>
-  <div class="container">Statistics</div>
+  <div class="container">
+    Statistics
+    <hr />
+    <Nav />
+  </div>
 </template>
 
 <script>
 export default {
-  components: {},
   data() {
     return {};
   },
