@@ -7,6 +7,8 @@
   </div>
 </template>
 <script>
+import icon from "@/assets/icons/label.svg";
+console.log(icon);
 export default {
   name: "LayOut",
   data() {
