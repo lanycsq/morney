@@ -4,11 +4,9 @@ module.exports = {
   lintOnSave: false,
   chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons');
-    config.module.
-    rule('svg').
-    exclude.add(dir);
+
     config.module
-      .rule('svg')
+      .rule('svg-sprite')
       .test(/\.svg$/)
       .include
       .add(dir)
@@ -18,11 +16,25 @@ module.exports = {
       .options({
         extract: false
       })
-      .end();
+      .end()
+      .use('svgo-loader')
+      .loader('svgo-loader')
+      .tap(options => ({
+        ...options,
+        plugins: [{
+          removeAtts: {
+            attrs: 'fill'
+          }
+        }]
+      }));
     config.plugin('svg-sprite').
     use(require('svg-sprite-loader/plugin'), [{
-      plainSprite: true
-    }]);
+        plainSprite: true
+      }])
+      .end();
+    config.module.
+    rule('svg').
+    exclude.add(dir);
 
   }
 
