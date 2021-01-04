@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import LayOut from "@/components/LayOut.vue";
 export default {
   components: { LayOut },

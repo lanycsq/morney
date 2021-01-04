@@ -6,9 +6,9 @@
     <Nav />
   </div>
 </template>
-<script>
-import icon from "@/assets/icons/label.svg";
-console.log(icon);
+<script lang="ts">
+import label from "@/assets/icons/label.svg";
+console.log(label);
 export default {
   name: "LayOut",
   data() {
