@@ -7,8 +7,6 @@
   </div>
 </template>
 <script lang="ts">
-import label from "@/assets/icons/label.svg";
-console.log(label);
 export default {
   name: "LayOut",
   data() {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path');
 
 module.exports = {
@@ -11,8 +12,8 @@ module.exports = {
       .include
       .add(dir)
       .end()
-      .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
+      .use('svg-sprite-loader-mod')
+      .loader('svg-sprite-loader-mod')
       .options({
         extract: false
       })
@@ -22,13 +23,13 @@ module.exports = {
       .tap(options => ({
         ...options,
         plugins: [{
-          removeAtts: {
+          removeAttrs: {
             attrs: 'fill'
           }
         }]
       }));
     config.plugin('svg-sprite').
-    use(require('svg-sprite-loader/plugin'), [{
+    use(require('svg-sprite-loader-mod/plugin'), [{
         plainSprite: true
       }])
       .end();
