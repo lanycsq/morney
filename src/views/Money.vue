@@ -16,9 +16,4 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@import "~@/assets/style/index.scss";
-$red: #f00;
-p {
-  color: $red;
-}
 </style>
