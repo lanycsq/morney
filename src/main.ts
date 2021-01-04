@@ -5,12 +5,14 @@ import router from './router'
 import store from './store'
 import Nav from "@/components/Nav.vue";
 import LayOut from "@/components/LayOut.vue";
+import Icon from "@/components/Icon.vue";
 
 Vue.config.productionTip = false
 
 //全局引入Nav
 Vue.component('Nav', Nav)
 Vue.component('LayOut', LayOut)
+Vue.component('Icon', Icon)
 
 new Vue({
   router,
