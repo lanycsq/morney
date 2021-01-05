@@ -4,7 +4,7 @@
       <number-pad />
       <types />
       <notes />
-      <tags />
+      <tags :data-source="tags" />
     </lay-out>
   </div>
 </template>
@@ -18,7 +18,9 @@ import Notes from "@/components/money/Notes.vue";
 export default {
   components: { LayOut, Tags, Types, NumberPad, Notes },
   data() {
-    return {};
+    return {
+      tags: ["衣", "食", "住", "行", "hh"],
+    };
   },
 };
 </script>
