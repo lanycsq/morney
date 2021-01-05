@@ -1,13 +1,9 @@
 <template>
   <div>
     <label class="notes">
+      {{ value }}
       <span class="name">备注</span>
-      <input
-        :value="value"
-        @input="onInput"
-        type="text"
-        placeholder="在这里输入备注"
-      />
+      <input v-model="value" type="text" placeholder="在这里输入备注" />
     </label>
   </div>
 </template>
@@ -19,12 +15,8 @@ import { Component } from "vue-property-decorator";
 @Component
 export default class Notes extends Vue {
   value = "";
-  onChange(event: KeyboardEvent) {
-    const input = event.target as HTMLInputElement;
-    this.value = input.value;
-  }
 }
-</script>
+</script>ue
 
 <style scoped lang="scss">
 .notes {
