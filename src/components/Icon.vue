@@ -7,8 +7,6 @@
 </template>
 
 <script lang="ts">
-// import label from "@/assets/icons/label.svg";
-// console.log(label);
 const importAll = (requireContext: __WebpackModuleApi.RequireContext) =>
   requireContext.keys().forEach(requireContext);
 try {
