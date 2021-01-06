@@ -12,7 +12,6 @@
 <script  lang="ts">
 import Vue from "vue";
 import { Component, Model, Prop, Watch } from "vue-property-decorator";
-import LayOut from "@/components/LayOut.vue";
 import Tags from "@/components/money/Tags.vue";
 import Types from "@/components/money/Types.vue";
 import NumberPad from "@/components/money/NumberPad.vue";
@@ -25,7 +24,7 @@ localStorage.setItem("version", "0.0.1");
 const recordList = recordListModel.fetch();
 const tagList = tagListModel.fetch();
 
-@Component({ components: { LayOut, Tags, Types, NumberPad, Notes } })
+@Component({ components: { Tags, Types, NumberPad, Notes } })
 export default class Money extends Vue {
   tags = tagList;
   record: RecordItem = {

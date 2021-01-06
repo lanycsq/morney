@@ -2,8 +2,8 @@
   <div>
     <lay-out>
       <ol class="tags">
-        <li v-for="tag in tags" :key="tag">
-          <span>{{ tag }}</span>
+        <li v-for="tag in tags.data" :key="tag">
+          <span>{{ tag.name }}</span>
           <Icon name="right" />
         </li>
       </ol>
@@ -17,14 +17,13 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Model, Prop, Watch } from "vue-property-decorator";
-import LayOut from "@/components/LayOut.vue";
 import tagListModel from "@/models/tagListModel";
 
 tagListModel.fetch();
 
-Component({ components: { LayOut } });
+@Component({})
 export default class Labels extends Vue {
-  tags = tagListModel.data;
+  tags = tagListModel;
   createTag() {
     const name = window.prompt("请输入标签名");
     if (name) {
@@ -35,10 +34,6 @@ export default class Labels extends Vue {
         alert("添加成功");
       }
     }
-  }
-  @Watch("tags")
-  onchange() {
-    console.log("tag改变了");
   }
 }
 </script>
