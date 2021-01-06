@@ -3,11 +3,13 @@
     <lay-out content-prefix="layout">
       <number-pad :value.sync="record.amount" @submit="saveRecord" />
       <types :value.sync="record.type" />
-      <notes
-        field-name="备注"
-        placeholder="在这里输入备注"
-        @update:value="onUpdateNotes"
-      />
+      <div class="notes">
+        <FromItem
+          field-name="备注"
+          placeholder="在这里输入备注"
+          @update:value="onUpdateNotes"
+        />
+      </div>
       <tags :data-source.sync="tags" @update:value="onUpdateTags" />
     </lay-out>
   </div>
@@ -19,7 +21,7 @@ import { Component, Model, Prop, Watch } from "vue-property-decorator";
 import Tags from "@/components/money/Tags.vue";
 import Types from "@/components/money/Types.vue";
 import NumberPad from "@/components/money/NumberPad.vue";
-import Notes from "@/components/money/Notes.vue";
+import FromItem from "@/components/money/FromItem.vue";
 import recordListModel from "@/models/recordListModel";
 import tagListModel from "@/models/tagListModel";
 
@@ -28,7 +30,7 @@ localStorage.setItem("version", "0.0.1");
 const recordList = recordListModel.fetch();
 const tagList = tagListModel.fetch();
 
-@Component({ components: { Tags, Types, NumberPad, Notes } })
+@Component({ components: { Tags, Types, NumberPad, FromItem } })
 export default class Money extends Vue {
   tags = tagList;
   record: RecordItem = {
@@ -62,4 +64,7 @@ export default class Money extends Vue {
 }
 </style>
 <style scoped lang="scss">
+.notes {
+  padding: 12px 0;
+}
 </style>

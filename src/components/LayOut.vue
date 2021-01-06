@@ -18,6 +18,7 @@ export default {
 
 <style scoped lang="scss">
 .wrapper {
+  background: #f0f0f0;
   display: flex;
   flex-direction: column;
   height: 100vh;
