@@ -49,7 +49,7 @@ nav {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    > .icon {
+    ::v-deep .icon {
       width: 30px;
       height: 30px;
     }
