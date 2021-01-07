@@ -1,10 +1,9 @@
 <template>
   <div>
     <label class="notes">
-      {{ value }}
       <span class="name">{{ this.fieldName }}</span>
       <input
-        :valel="value"
+        :value="value"
         @input="onValueChanged($event.target.value)"
         type="text"
         :placeholder="placeholder"
