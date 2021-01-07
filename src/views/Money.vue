@@ -28,11 +28,11 @@ import tagListModel from "@/models/tagListModel";
 localStorage.setItem("version", "0.0.1");
 
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
+// const tagList = tagListModel.fetch();
 
 @Component({ components: { Tags, Types, NumberPad, FromItem } })
 export default class Money extends Vue {
-  tags = tagList;
+  tags = window.tagList;
   record: RecordItem = {
     tags: [],
     notes: "",
