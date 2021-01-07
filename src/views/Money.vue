@@ -22,19 +22,20 @@ import Tags from "@/components/money/Tags.vue";
 import Types from "@/components/money/Types.vue";
 import NumberPad from "@/components/money/NumberPad.vue";
 import FromItem from "@/components/money/FromItem.vue";
+import store from "@/store/index2";
 
 localStorage.setItem("version", "0.0.1");
 
 @Component({ components: { Tags, Types, NumberPad, FromItem } })
 export default class Money extends Vue {
-  tags = window.tagList;
+  tags = store.tagList;
   record: RecordItem = {
     tags: [],
     notes: "",
     type: "-",
     amount: 0,
   };
-  recordList = window.recordList;
+  recordList = store.recordList;
   onUpdateTags(tags: string[]) {
     this.record.tags = tags;
   }
@@ -42,7 +43,7 @@ export default class Money extends Vue {
     this.record.notes = notes;
   }
   saveRecord() {
-    window.createRecord(this.record);
+    store.createRecord(this.record);
   }
 }
 </script>
