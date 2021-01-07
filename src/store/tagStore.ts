@@ -22,7 +22,9 @@ const tagStore = {
         }
         const id = createId().toString();
         this.tagList.push({ id, name });
+        console.log(this.tagList);
         tagStore.saveTags();
+        console.log(this.tagList);
         window.alert("添加成功");
         return "success";
     },
