@@ -4,12 +4,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex) //把store绑到vue原型上vue.prototype $store=store
+type RootStore = {
+  recordList: RecordItem[];
+  tagList: Tag[];
+  currentTag?: Tag;
+}
 
 const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
     tagList: [] as Tag[],
-  },
+    currentTag: undefined
+  } as RootStore,
   mutations: {
     fetchRecords(state) {
       state.recordList = JSON.parse(localStorage.getItem('recordList') || "[]") as RecordItem[];
@@ -43,6 +49,9 @@ const store = new Vuex.Store({
     saveTags(state) {
       window.localStorage.setItem('tagList', JSON.stringify(state.tagList))
     },
+    setCurrentTag(state, id: string) {
+      state.currentTag = state.tagList.filter(t => t.id === id)[0]
+    }
   }
 
 })

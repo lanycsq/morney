@@ -21,7 +21,6 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import TagHelper from "@/mixins/TagHelper";
 import { mixins } from "vue-class-component";
-// import store from "@/store/index2";
 
 @Component({
   computed: {
