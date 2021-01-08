@@ -2,7 +2,11 @@
   <div>
     <lay-out content-prefix="layout">
       <number-pad :value.sync="record.amount" @submit="saveRecord" />
-      <types :value.sync="record.type" />
+      <tabs
+        class-prefix="types"
+        :data-source="recordTypeList"
+        :value.sync="record.type"
+      />
       <div class="notes">
         <FromItem
           field-name="备注"
@@ -19,14 +23,15 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Tags from "@/components/money/Tags.vue";
-import Types from "@/components/money/Types.vue";
+import Tabs from "@/components/Tabs.vue";
 import NumberPad from "@/components/money/NumberPad.vue";
 import FromItem from "@/components/money/FromItem.vue";
+import recordTypeList from "@/constants/recordTypeList";
 
 localStorage.setItem("version", "0.0.1");
 
 @Component({
-  components: { Tags, Types, NumberPad, FromItem },
+  components: { Tags, NumberPad, Tabs, FromItem },
   computed: {
     recordList() {
       return this.$store.state.recordList;
@@ -34,7 +39,7 @@ localStorage.setItem("version", "0.0.1");
   },
 })
 export default class Money extends Vue {
-  // tags = oldStore.tagList;
+  recordTypeList = recordTypeList;
   record: RecordItem = {
     tags: [],
     notes: "",
