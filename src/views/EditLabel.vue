@@ -14,7 +14,7 @@
       />
     </div>
     <div class="button-wrapper">
-      <Button @click="remove">删除标签</Button>
+      <Button @click="removeTag">删除标签</Button>
     </div>
   </lay-out>
 </template>
@@ -32,23 +32,22 @@ export default class EditLabel extends Vue {
     return this.$store.state.currentTag;
   }
   created() {
-    this.$store.commit("setCuurentTag", this.$route.params.id);
+    const id = this.$route.params.id;
+    console.log(id);
+    this.$store.commit("fetchTags");
+    this.$store.commit("setCurrentTag", id);
     if (!this.tag) {
       this.$router.replace("/404");
     }
   }
   updateTag(name: string) {
     if (this.tag) {
-      // this.$store.updateTag(this.tag.id, name);
+      this.$store.commit("updateTag", { id: this.tag.id, name: name });
     }
   }
-  remove() {
+  removeTag() {
     if (this.tag) {
-      // if (this.$store.removeTag(this.tag.id)) {
-      //   this.$router.back();
-      // } else {
-      //   alert("删除失败");
-      // }
+      this.$store.commit("removeTag", this.tag.id);
     }
   }
   goBack() {
