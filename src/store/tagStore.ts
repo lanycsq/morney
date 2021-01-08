@@ -3,16 +3,13 @@ import createId from "@/lib/idCreator";
 const localStorageName = 'tagList';
 
 const tagStore = {
-    tagList:[] as Tag[],
+    tagList: [] as Tag[],
     fetchTags() {
-        this.tagList= JSON.parse(window.localStorage.getItem(localStorageName) || "[]")
+        this.tagList = JSON.parse(window.localStorage.getItem(localStorageName) || "[]")
         return this.tagList;
     },
-    findTag(id: string){
-        return this.tagList.filter(t=>t.id===id)[0]
-    },
-    saveTags() {
-        window.localStorage.setItem(localStorageName, JSON.stringify(this.tagList))
+    findTag(id: string) {
+        return this.tagList.filter(t => t.id === id)[0]
     },
     createTag(name: string) {
         const names = this.tagList.map(item => item.name)
@@ -22,11 +19,12 @@ const tagStore = {
         }
         const id = createId().toString();
         this.tagList.push({ id, name });
-        console.log(this.tagList);
-        tagStore.saveTags();
-        console.log(this.tagList);
+        this.saveTags();
         window.alert("添加成功");
         return "success";
+    },
+    saveTags() {
+        window.localStorage.setItem(localStorageName, JSON.stringify(this.tagList))
     },
     updateTag(id: string, name: string) {
         const idList = this.tagList.map(item => item.id)

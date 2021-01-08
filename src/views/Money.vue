@@ -10,37 +10,45 @@
           @update:value="onUpdateNotes"
         />
       </div>
-      <tags :data-source="tags"  />
+      <tags />
     </lay-out>
   </div>
 </template>
 
 <script  lang="ts">
 import Vue from "vue";
-import { Component, Model, Prop, Watch } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import Tags from "@/components/money/Tags.vue";
 import Types from "@/components/money/Types.vue";
 import NumberPad from "@/components/money/NumberPad.vue";
 import FromItem from "@/components/money/FromItem.vue";
-import store from "@/store/index2";
 
 localStorage.setItem("version", "0.0.1");
 
-@Component({ components: { Tags, Types, NumberPad, FromItem } })
+@Component({
+  components: { Tags, Types, NumberPad, FromItem },
+  computed: {
+    recordList() {
+      return this.$store.state.recordList;
+    },
+  },
+})
 export default class Money extends Vue {
-  tags = store.tagList;
+  // tags = oldStore.tagList;
   record: RecordItem = {
     tags: [],
     notes: "",
     type: "-",
     amount: 0,
   };
-  recordList = store.recordList;
+  created() {
+    this.$store.commit("fetchRecords");
+  }
   onUpdateNotes(notes: string) {
     this.record.notes = notes;
   }
   saveRecord() {
-    store.createRecord(this.record);
+    this.$store.commit("createRecord", this.record);
   }
 }
 </script>
