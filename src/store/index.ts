@@ -5,11 +5,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex) //把store绑到vue原型上vue.prototype $store=store
-type RootStore = {
-  recordList: RecordItem[];
-  tagList: Tag[];
-  currentTag?: Tag;
-}
+
 
 const store = new Vuex.Store({
   state: {
@@ -27,7 +23,7 @@ const store = new Vuex.Store({
     },
     createRecord(state, record: RecordItem) {
       const record2: RecordItem = clone(record);
-      record2.createAt = new Date();
+      record2.createAt = new Date().toISOString();
       state.recordList?.push(record2);
       store.commit('saveRecords')
     },

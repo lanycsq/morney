@@ -3,7 +3,7 @@ type RecordItem = {
     notes: string;
     type: string;
     amount: number;
-    createAt?: Date;
+    createAt?: string;
 };
 
 type Tag = {
@@ -17,6 +17,11 @@ type TagListModel = {
     save: () => void;
     update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
     remove: (id: string) => boolean;
+}
+type RootStore = {
+    recordList: RecordItem[];
+    tagList: Tag[];
+    currentTag?: Tag;
 }
 // interface Window {
 //     // store: {
