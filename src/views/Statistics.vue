@@ -14,17 +14,7 @@
     />
     <div>
       <ol>
-        <li v-for="(group, index) in result" :key="index">
-          <h3 class="title">{{ group.title }}</h3>
-          <ol>
-            <li v-for="item in group.items" :key="item.id" class="record">
-              <span>{{ tagString(item.tags) }}</span>
-              <span class="notes">{{ item.notes }}</span>
-              <span>￥{{ item.amount }} </span>
-            </li>
-          </ol>
-        </li>
-        <li v-for="(group, index) in result" :key="index">
+        <li v-for="group in result" :key="group.title">
           <h3 class="title">{{ group.title }}</h3>
           <ol>
             <li v-for="item in group.items" :key="item.id" class="record">
@@ -46,6 +36,10 @@ import LayOut from "@/components/LayOut.vue";
 import Tabs from "@/components/Tabs.vue";
 import recordTypeList from "@/constants/recordTypeList";
 import intervalList from "@/constants/intervalList";
+import dayjs from "dayjs";
+
+const api=dayjs();
+console.log(api);
 
 @Component({
   components: { LayOut, Tabs },
