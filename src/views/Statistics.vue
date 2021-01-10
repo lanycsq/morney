@@ -14,8 +14,8 @@
     />
     <div>
       <ol>
-        <li v-for="group in result" :key="group.title">
-          <h3 class="title">{{ group.title }}</h3>
+        <li v-for="(group,index) in groupedList" :key="index">
+          <h3 class="title">{{beautify(group.title)}}</h3>
           <ol>
             <li v-for="item in group.items" :key="item.id" class="record">
               <span>{{ tagString(item.tags) }}</span>
@@ -37,8 +37,10 @@ import Tabs from "@/components/Tabs.vue";
 import recordTypeList from "@/constants/recordTypeList";
 import intervalList from "@/constants/intervalList";
 import dayjs from "dayjs";
+import clone from '@/lib/clone';
 
 const api=dayjs();
+console.log("0000000000")
 console.log(api);
 
 @Component({
@@ -51,17 +53,39 @@ export default class Statistics extends Vue {
   get recordList() {
     return (this.$store.state as RootStore).recordList;
   }
-  get result() {
+  get groupedList() {
     const { recordList } = this;
-    type HashTableValue = { title: string; items: RecordList[] };
-    const hashTable: { [key: string]: HashTableValue } = {};
-    for (let i = 0; i < recordList.length; i++) {
-      const [date, time] = recordList[i].createAt!.split("T");
-      hashTable[date] = hashTable[date] || { title: date, items: [] };
-      hashTable[date].items.push(recordList[i]);
+    if(recordList.length===0){return[]}
+    const newList=clone(recordList).sort(
+            (a,b)=>dayjs(b.createAt).valueOf()-dayjs(a.createAt).valueOf()
+            )
+   const result=[{title:dayjs(newList[0].createAt).format('YYYY-MM-DD'),items:[newList[0]]}]
+    for (let i=1;i<newList.length;i++){
+      const current=newList[i];
+      const last=result[result.length-1];
+      if(dayjs(last.title).isSame(dayjs((current.createAt),'day'))){
+        last.items.push(current)
+      }else {
+        result.push({title: dayjs(current.createAt).format("YYYY-MM-DD"), items: [current]})
+      }
     }
-    return hashTable;
+    return result;
   }
+  beautify(string: string){
+    const now=dayjs();
+    const day=dayjs(string)
+    if(day.isSame(now,'day')){
+      return '今天';
+    }else if(day.isSame(now.subtract(1,'day'),'day')){
+      return '昨天';
+    }else if(day.isSame(now.subtract(2,'day'),'day')){
+      return '前天';
+    }else if(day.isSame(now,'year')){
+      return day.format('MM月D日')
+    }else{
+      return day.format('YYYY年MM月D日')
+    }
+}
   beforeCreate() {
     this.$store.commit("fetchRecords");
   }
