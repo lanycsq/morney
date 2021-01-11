@@ -20,6 +20,8 @@ type TagListModel = {
 }
 type RootStore = {
     recordList: RecordItem[];
+    createRecordError?: Error | null;
+    createTagError?: Error | null;
     tagList: Tag[];
     currentTag?: Tag;
 }

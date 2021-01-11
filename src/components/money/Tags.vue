@@ -30,7 +30,6 @@ import { mixins } from "vue-class-component";
   },
 })
 export default class Tags extends mixins(TagHelper) {
-  // tagList = store.fetchTags();
   created() {
     this.$store.commit("fetchTags");
   }
@@ -45,13 +44,6 @@ export default class Tags extends mixins(TagHelper) {
     }
     this.$emit("update:value", this.selectedTags);
   }
-  // create() {
-  //   const name = window.prompt("请输入标签名称");
-  //   if (!name) {
-  //     return window.prompt("标签名称不能为空");
-  //   }
-  //   this.$store.commit("createTag", name);
-  // }
 }
 </script>
 

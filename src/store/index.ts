@@ -10,6 +10,8 @@ Vue.use(Vuex) //把store绑到vue原型上vue.prototype $store=store
 const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
+    createRecordError: null,
+    createTagError: null,
     tagList: [] as Tag[],
     currentTag: undefined
   } as RootStore,
@@ -29,17 +31,23 @@ const store = new Vuex.Store({
     },
     fetchTags(state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || "[]")
+      if (!state.tagList || state.tagList.length === 0) {
+        store.commit('createTag', '衣');
+        store.commit('createTag', '食');
+        store.commit('createTag', '住');
+        store.commit('createTag', '行');
+      }
       return state.tagList;
     },
     createTag(state, name: string) {
       const names = state.tagList.map(item => item.name)
       if (names.indexOf(name) >= 0) {
-        alert("标签名重复了")
+        state.createTagError = new Error('tag name duplicated')
+        return;
       }
       const id = createId().toString();
       state.tagList.push({ id, name });
       store.commit('saveTags')
-      window.alert("添加成功");
     },
     saveTags(state) {
       window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
