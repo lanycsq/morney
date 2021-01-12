@@ -129,8 +129,9 @@ export default class Statistics extends Vue {
   }
 }
 %item {
-  padding: 8px 16px;
+  padding: 6px 16px;
   line-height: 24px;
+  font-size: 14px;
   display: flex;
   justify-content: space-between;
   align-content: center;

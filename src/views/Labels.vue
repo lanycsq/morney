@@ -20,7 +20,6 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Button from "@/components/money/Button.vue";
 import { mixins } from "vue-class-component";
@@ -50,7 +49,7 @@ export default class Labels extends mixins(TagHelper) {
 <style scoped lang="scss">
 .tags {
   background-color: #ffffff;
-  font-size: 16px;
+  font-size: 14px;
   padding-left: 16px;
   > .item {
     min-height: 44px;
@@ -59,10 +58,10 @@ export default class Labels extends mixins(TagHelper) {
     justify-content: space-between;
     border-bottom: 1px solid #e6e6e6;
     ::v-deep svg {
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       color: #666;
-      margin-right: 16px;
+      margin-right: 14px;
     }
   }
 }

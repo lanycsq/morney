@@ -9,17 +9,15 @@
       />
       <div class="notes">
         <FromItem
-          field-name="备注"
-          :value.sync="record.notes"
-          placeholder="在这里输入备注"
-        />
-      </div>
-      <div class="notes">
-        <FromItem
           type="date"
           field-name="日期"
           :value.sync="record.createAt"
           placeholder="在这里输入日期"
+        />
+        <FromItem
+          field-name="备注"
+          :value.sync="record.notes"
+          placeholder="在这里输入备注"
         />
       </div>
       <tags @update:value="record.tags = $event" />

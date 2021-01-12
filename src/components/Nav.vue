@@ -25,7 +25,6 @@ try {
   importAll(require.context("../assets/icons", true, /\.svg$/));
 } catch (error) {
   console.log(error);
-  console.log("0000000000");
 }
 
 export default {
@@ -43,15 +42,18 @@ nav {
   display: flex;
   flex-direction: row;
   > .item {
-    padding: 2px 0;
+    padding: 6px 0 4px 0;
     width: 33.33333%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     ::v-deep .icon {
-      width: 30px;
-      height: 30px;
+      width: 18px;
+      height: 18px;
+    }
+    > span {
+      font-size: 12px;
     }
   }
   /**路由激活*/

@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import TagHelper from "@/mixins/TagHelper";
 import { mixins } from "vue-class-component";
 
@@ -82,6 +82,7 @@ export default class Tags extends mixins(TagHelper) {
       color: #999;
       border-bottom: 1px solid;
       padding: 0 4px;
+      font-size: 12px;
     }
   }
 }
