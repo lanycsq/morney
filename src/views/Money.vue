@@ -14,6 +14,14 @@
           placeholder="在这里输入备注"
         />
       </div>
+      <div class="notes">
+        <FromItem
+          type="date"
+          field-name="日期"
+          :value.sync="record.createAt"
+          placeholder="在这里输入日期"
+        />
+      </div>
       <tags @update:value="record.tags = $event" />
     </lay-out>
   </div>
@@ -45,6 +53,7 @@ export default class Money extends Vue {
     notes: "",
     type: "-",
     amount: 0,
+    createAt: new Date().toISOString(),
   };
   created() {
     this.$store.commit("fetchRecords");
@@ -56,7 +65,9 @@ export default class Money extends Vue {
     if (!this.record.tags || this.record.tags.length === 0) {
       return window.alert("请至少选择一个标签");
     }
-    console.log(this.record.tags);
+    if (this.record.amount === 0) {
+      return;
+    }
     this.$store.commit("createRecord", this.record);
     if (this.$store.state.createRecordError === null) {
       window.alert("已保存");
