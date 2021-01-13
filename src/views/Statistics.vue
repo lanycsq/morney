@@ -37,7 +37,8 @@ import intervalList from "@/constants/intervalList";
 import Chart from "@/components/Chart.vue";
 import dayjs from "dayjs";
 import clone from "@/lib/clone";
-const api = dayjs();
+import  _ from 'lodash'
+
 
 @Component({
   components: { LayOut, Tabs, Chart },
@@ -85,39 +86,43 @@ export default class Statistics extends Vue {
     return result;
   }
   get x() {
+    console.log(this.recordList);
+    const array=[];
+    const today=new Date();
+    for (let i=0;i<=29;i++){
+      const dateString=dayjs(today).subtract(i,'day').format("YYYY-MM-DD");
+      const found=_.find(this.recordList,{createAt:dateString})
+       array.push({date:dateString,value:found?found.amount:0});
+    }
+    array.sort((a,b)=>{
+      if(a.date>b.date){
+        return 1
+      }else if (a.date===b.date){
+        return 0
+      }else {
+        return -1
+      }
+    })
+    const keys=array.map(item=>item.date)
+    const values=array.map(item=>item.value)
+    console.log(array)
     return {
       xAxis: {
         type: "category",
-        data: [
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri",
-          "Sat",
-          "Sun",
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri",
-          "Sat",
-          "Sun",
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri",
-          "Sat",
-          "Sun",
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri",
-          "Sat",
-          "Sun",
-        ],
+        data: keys,
+        axisLabel:{
+          formatter: function (value: string,index: number) {
+            // 格式化成月/日，只在第一个刻度显示年份
+            return value.substr(5)
+          }
+        },
+        axisTick:{
+          alignWithLabel:true
+        },
+        axisLine:{
+          lineStyle:{color:"#666"}
+        },
+
       },
       yAxis: {
         type: "value",
@@ -127,42 +132,18 @@ export default class Statistics extends Vue {
       },
       series: [
         {
-          data: [
-            120,
-            200,
-            150,
-            80,
-            70,
-            110,
-            130,
-            120,
-            200,
-            150,
-            80,
-            70,
-            110,
-            130,
-            120,
-            200,
-            150,
-            80,
-            70,
-            110,
-            130,
-            120,
-            200,
-            150,
-            80,
-            70,
-            110,
-            130,
-          ],
-
+          data: values,
           type: "line",
           showBackground: true,
           backgroundStyle: {
             color: "rgba(220, 220, 220, 0.8)",
           },
+          itemStyle:{
+            borderWidth:1,
+            color:'#666'
+          },
+          symbol:'circle',
+          symbolSize:20
         },
       ],
     };
