@@ -6,6 +6,7 @@
       :data-source="recordTypeList"
       :value.sync="recordType"
     />
+    <Chart :options="x"></Chart>
     <div>
       <ol v-if="groupedList.length > 0">
         <li v-for="(group, index) in groupedList" :key="index">
@@ -33,15 +34,13 @@ import LayOut from "@/components/LayOut.vue";
 import Tabs from "@/components/Tabs.vue";
 import recordTypeList from "@/constants/recordTypeList";
 import intervalList from "@/constants/intervalList";
+import Chart from "@/components/Chart.vue";
 import dayjs from "dayjs";
 import clone from "@/lib/clone";
-
 const api = dayjs();
-console.log("0000000000");
-console.log(api);
 
 @Component({
-  components: { LayOut, Tabs },
+  components: { LayOut, Tabs, Chart },
 })
 export default class Statistics extends Vue {
   tagString(tags: Tag[]) {
@@ -84,6 +83,89 @@ export default class Statistics extends Vue {
       group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
     });
     return result;
+  }
+  get x() {
+    return {
+      xAxis: {
+        type: "category",
+        data: [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
+          "Sun",
+        ],
+      },
+      yAxis: {
+        type: "value",
+      },
+      tooltip: {
+        show: true,
+      },
+      series: [
+        {
+          data: [
+            120,
+            200,
+            150,
+            80,
+            70,
+            110,
+            130,
+            120,
+            200,
+            150,
+            80,
+            70,
+            110,
+            130,
+            120,
+            200,
+            150,
+            80,
+            70,
+            110,
+            130,
+            120,
+            200,
+            150,
+            80,
+            70,
+            110,
+            130,
+          ],
+
+          type: "line",
+          showBackground: true,
+          backgroundStyle: {
+            color: "rgba(220, 220, 220, 0.8)",
+          },
+        },
+      ],
+    };
   }
   beautify(string: string) {
     const now = dayjs();
@@ -147,6 +229,10 @@ export default class Statistics extends Vue {
   margin-right: auto;
   margin-left: 16px;
   color: #999;
+}
+.echarts {
+  max-width: 100%;
+  height: 400px;
 }
 </style>
 
