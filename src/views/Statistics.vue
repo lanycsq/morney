@@ -6,7 +6,7 @@
       :data-source="recordTypeList"
       :value.sync="recordType"
     />
-    <Chart :options="x"></Chart>
+    <Chart :options="xx"></Chart>
     <div>
       <ol v-if="groupedList.length > 0">
         <li v-for="(group, index) in groupedList" :key="index">
@@ -85,7 +85,7 @@ export default class Statistics extends Vue {
     });
     return result;
   }
-  get x() {
+  get xx() {
     console.log(this.recordList);
     const array=[];
     const today=new Date();
